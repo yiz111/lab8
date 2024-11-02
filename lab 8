@@ -1,0 +1,146 @@
+full_name = input("Enter your full name: ")
+# Split the name into parts and get the first letter of each
+initials = ' '.join([name[0].upper() + '.' for name in full_name.split()])
+print(initials)
+
+
+
+numbers = input("Enter a series of single-digit numbers: ")
+# Calculate the sum of each character converted to an integer
+sum_of_digits = sum(int(digit) for digit in numbers)
+print(sum_of_digits)
+
+
+
+
+date_input = input("Enter a date (mm/dd/yyyy): ")
+# Split the input into month, day, and year
+month, day, year = date_input.split('/')
+# Define a list of month names
+months = ["January", "February", "March", "April", "May", "June", 
+          "July", "August", "September", "October", "November", "December"]
+# Convert month number to month name
+formatted_date = f"{months[int(month) - 1]} {int(day)}, {year}"
+print(formatted_date)
+
+
+
+
+# Define the Morse code dictionary
+morse_code_dict = {
+    'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 
+    'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 
+    'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 
+    'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 
+    'Y': '-.--', 'Z': '--..', 
+    '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', 
+    '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.'
+}
+
+# Function to convert text to Morse code
+def text_to_morse(text):
+    morse_code = []
+    for char in text.upper():
+        if char in morse_code_dict:
+            morse_code.append(morse_code_dict[char])
+        elif char == ' ':
+            morse_code.append(' / ')  # Add space between words
+    return ' '.join(morse_code)
+
+# Get user input
+user_input = input("Enter text to convert to Morse code: ")
+print("Morse Code:", text_to_morse(user_input))
+
+
+
+
+
+
+# Define the letter-to-number mapping based on a standard telephone keypad
+letter_to_number = {
+    'A': '2', 'B': '2', 'C': '2',
+    'D': '3', 'E': '3', 'F': '3',
+    'G': '4', 'H': '4', 'I': '4',
+    'J': '5', 'K': '5', 'L': '5',
+    'M': '6', 'N': '6', 'O': '6',
+    'P': '7', 'Q': '7', 'R': '7', 'S': '7',
+    'T': '8', 'U': '8', 'V': '8',
+    'W': '9', 'X': '9', 'Y': '9', 'Z': '9'
+}
+
+# Function to translate alphabetic phone number to numeric format
+def translate_phone_number(phone_number):
+    translated_number = ""
+    for char in phone_number.upper():
+        if char in letter_to_number:
+            translated_number += letter_to_number[char]
+        else:
+            translated_number += char  # Keep numbers and other characters as they are
+    return translated_number
+
+# Get user input
+user_input = input("Enter a telephone number (e.g., 555-GET-FOOD): ")
+print("Numeric Telephone Number:", translate_phone_number(user_input))
+
+
+
+
+
+
+def average_words_per_sentence(filename):
+    with open(filename, 'r') as file:
+        sentences = file.readlines()
+        total_words = sum(len(sentence.split()) for sentence in sentences)
+        average = total_words / len(sentences) if sentences else 0
+    return average
+
+# Call the function and print the result
+filename = 'text.txt'  # Replace with the path to your file
+print("Average number of words per sentence:", average_words_per_sentence(filename))
+
+
+
+
+
+
+def character_analysis(filename):
+    upper_count = 0
+    lower_count = 0
+    digit_count = 0
+    whitespace_count = 0
+    
+    with open(filename, 'r') as file:
+        for line in file:
+            for char in line:
+                if char.isupper():
+                    upper_count += 1
+                elif char.islower():
+                    lower_count += 1
+                elif char.isdigit():
+                    digit_count += 1
+                elif char.isspace():
+                    whitespace_count += 1
+    
+    print("Uppercase letters:", upper_count)
+    print("Lowercase letters:", lower_count)
+    print("Digits:", digit_count)
+    print("Whitespace characters:", whitespace_count)
+
+# Call the function
+filename = 'text.txt'  # Replace with the path to your file
+character_analysis(filename)
+
+
+
+
+def capitalize_sentences(text):
+    # Split text into sentences based on periods
+    sentences = text.split('. ')
+    # Capitalize the first letter of each sentence
+    capitalized_sentences = [sentence.capitalize() for sentence in sentences]
+    # Join sentences back with '. ' separator
+    return '. '.join(capitalized_sentences)
+
+# Get user input and display the modified string
+user_input = input("Enter a text: ")
+print("Capitalized Text:", capitalize_sentences(user_input))
